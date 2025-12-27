@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        follow(iter){
+            var x = this.parent.x;
+            var y = this.parent.y;
+            var dist = ((this.x - x) ** 2 + (this.y - y) ** 2 ) **0.5;
+            this.x = x + this.size * (this.x - x) / dist;
+            this.x = y + this.size * (this.y - y) / dist;
+            this.absAngle = Math.atan2(this.y - y, this.x - x);
+            this.relAngle = this.absAngle - this.parent.absAngle;
+            this.updateRelative(false, true);
+            //this.draw();
+            if (iter){
+                for(var i = 0; i < this.children.lenght; i++){
+                    this.children[i].follow(true);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
